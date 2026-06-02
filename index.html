@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amitava Nandi — Release & Delivery Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0b1628;
+  --navy-mid: #122040;
+  --navy-light: #1a2e56;
+  --gold: #c8a96e;
+  --gold-light: #e2c98a;
+  --cream: #f5f0e8;
+  --cream-mid: #ede6d8;
+  --text-dark: #1a1a2e;
+  --text-mid: #4a4a6a;
+  --text-light: #8888aa;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 4rem;
+  background: rgba(11, 22, 40, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,169,110,0.2);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 4rem;
+}
+
+.hero-bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  bottom: -10%; left: -5%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(26,46,86,0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 5rem;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(200,169,110,0.1);
+  border: 1px solid rgba(200,169,110,0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+
+.hero-name span { color: var(--gold); }
+
+.hero-title {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.hero-summary {
+  max-width: 560px;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 3rem;
+  font-weight: 300;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(200,169,110,0.15);
+  animation: fadeUp 0.6s ease 0.5s both;
+}
+
+.stat-item { }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ─── SECTION BASE ─── */
+section { padding: 6rem 4rem; }
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 3rem;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ─── EXPERIENCE ─── */
+#experience { background: var(--cream); }
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3.5rem;
+  padding-left: 2rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.45rem; top: 7px;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 2px solid var(--cream);
+  box-shadow: 0 0 0 3px rgba(200,169,110,0.2);
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.timeline-period {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  background: rgba(200,169,110,0.1);
+  border: 1px solid rgba(200,169,110,0.25);
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.timeline-company {
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
+.timeline-project {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.timeline-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.timeline-bullets li {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-mid);
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.timeline-bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.7rem;
+}
+
+/* ─── SKILLS ─── */
+#skills { background: var(--navy); }
+
+#skills .section-title { color: var(--white); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.skill-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,169,110,0.15);
+  border-radius: 8px;
+  padding: 1.6rem;
+  transition: all 0.25s ease;
+}
+
+.skill-card:hover {
+  background: rgba(200,169,110,0.07);
+  border-color: rgba(200,169,110,0.4);
+  transform: translateY(-3px);
+}
+
+.skill-card-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.skill-tag {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* ─── CERTIFICATIONS ─── */
+#certifications { background: var(--cream-mid); }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.cert-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.cert-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  border-color: rgba(200,169,110,0.3);
+}
+
+.cert-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cert-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.4;
+}
+
+/* ─── ACCOMPLISHMENTS ─── */
+#accomplishments { background: var(--navy); padding: 5rem 4rem; }
+
+#accomplishments .section-title { color: var(--white); }
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+
+.award-card {
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 8px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  background: rgba(200,169,110,0.04);
+}
+
+.award-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.award-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.award-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.award-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+/* ─── CONTACT ─── */
+#contact { background: var(--cream); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-intro {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text-mid);
+  padding: 1rem 1.4rem;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  font-size: 0.88rem;
+}
+
+.contact-item:hover {
+  border-color: var(--gold);
+  color: var(--navy);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.contact-item-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.contact-right {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 2.5rem;
+  border: 1px solid rgba(200,169,110,0.15);
+}
+
+.contact-right h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.contact-right p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 2rem;
+}
+
+.contact-right .location {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.langs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(200,169,110,0.15);
+}
+
+.lang-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.lang-level { color: var(--gold); font-size: 0.72rem; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(200,169,110,0.15);
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section, .hero { padding: 4rem 1.5rem; }
+  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AN</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#accomplishments">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Release · Delivery · Defect Management</div>
+    <h1 class="hero-name">Amitava<br><span>Nandi</span></h1>
+    <p class="hero-title">Release Manager &nbsp;·&nbsp; Delivery Manager &nbsp;·&nbsp; Defect Manager</p>
+    <p class="hero-summary">Results-driven professional with 14+ years of experience across financial services software delivery, specialising in large-scale core banking migrations with TCS BaNCS. Based in Peterborough, United Kingdom.</p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">14+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Major Migrations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20%</div>
+        <div class="stat-label">Defect Turnaround Reduction</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Awards & Recognition</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-eyebrow">Career History</p>
+    <h2 class="section-title">Professional <em>Experience</em></h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div class="timeline-role">Release Manager · Delivery Manager</div>
+          <div class="timeline-period">Jul 2024 – Present</div>
+        </div>
+        <div class="timeline-company">Tata Consultancy Services Ltd — Peterborough, UK</div>
+        <div class="timeline-project">Project: LBG UK — Multi-phased core banking migration to TCS BaNCS</div>
+        <ul class="timeline-bullets">
+          <li>Managed end-to-end releases across 3+ migration phases, coordinating 5+ cross-functional teams (QA, DevOps, governance, business) to consistently deliver on schedule.</li>
+          <li>Reduced defect turnaround time by 20% through ALM implementation for structured defect tracking, trend analysis, and root cause resolution.</li>
+          <li>Led comprehensive change impact assessments for 20+ change requests per release cycle, facilitating stakeholder readiness planning and minimising deployment risk.</li>
+          <li>Established and monitored release KPIs and progress blockers reported to senior leadership, with full RCA tracking per team.</li>
+          <li>Drove risk mitigation strategies by proactively identifying release blockers and coordinating timely resolution across delivery teams.</li>
+          <li>Facilitated daily stand-ups, sprint retrospectives, and release planning reviews to sustain team cohesion and delivery momentum.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div class="timeline-role">Test Manager · Defect Manager</div>
+          <div class="timeline-period">Jan 2022 – Jun 2024</div>
+        </div>
+        <div class="timeline-company">Tata Consultancy Services Ltd — Peterborough, UK</div>
+        <div class="timeline-project">Project: LBG UK — Multi-phased core banking migration to TCS BaNCS</div>
+        <ul class="timeline-bullets">
+          <li>Improved project efficiency by 15% by leading Agile adoption, streamlining sprint planning and backlog prioritisation with product owners.</li>
+          <li>Owned the full defect lifecycle from triage to closure, maintaining SLA adherence and producing weekly defect dashboards for leadership decisions.</li>
+          <li>Implemented structured defect triage process, reducing average defect resolution time and improving test coverage across regression and UAT cycles.</li>
+          <li>Collaborated with product owners to refine user stories and prioritise high-impact backlog items, aligning test strategy with business goals.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div class="timeline-role">Automation Test Lead · Business Analyst</div>
+          <div class="timeline-period">Jun 2017 – Dec 2021</div>
+        </div>
+        <div class="timeline-company">Tata Consultancy Services Ltd — Melbourne, Australia & Kolkata, India</div>
+        <div class="timeline-project">Project: MLC Australia — Multi-phased core banking migration to TCS BaNCS</div>
+        <ul class="timeline-bullets">
+          <li>Advanced from automation engineer to lead, mentoring team members and driving QA initiatives across multiple delivery phases.</li>
+          <li>Designed and directed testing using Selenium, significantly enhancing automated test coverage and reducing regression cycle time.</li>
+          <li>Acted as on-site Business Analyst in Melbourne, analysing product features and providing operational support to optimise team performance.</li>
+          <li>Part of the Automation Team that received the Best Team Award for excellence in project delivery.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-header">
+          <div class="timeline-role">Senior Associate</div>
+          <div class="timeline-period">Jan 2012 – May 2017</div>
+        </div>
+        <div class="timeline-company">Tata Consultancy Services — Kolkata, India</div>
+        <div class="timeline-project">Project: Aviva UK — Multi-phased migration to TCS BaNCS</div>
+        <ul class="timeline-bullets">
+          <li>Developed and executed comprehensive test cases to validate software quality across multiple release phases.</li>
+          <li>Conducted regression testing to confirm system stability following enhancements and fixes.</li>
+          <li>Analysed user requirements to produce detailed test plans aligned with project objectives.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow" style="color: var(--gold);">Capabilities</p>
+    <h2 class="section-title">Core <em>Skills</em></h2>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Delivery & Release Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Release Planning</span>
+          <span class="skill-tag">Multi-phase Rollouts</span>
+          <span class="skill-tag">KPI Monitoring</span>
+          <span class="skill-tag">Risk Mitigation</span>
+          <span class="skill-tag">RAID Management</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Change Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Impact Assessment</span>
+          <span class="skill-tag">Readiness Planning</span>
+          <span class="skill-tag">Stakeholder Engagement</span>
+          <span class="skill-tag">Governance Compliance</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Test & Defect Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">End-to-end Defect Lifecycle</span>
+          <span class="skill-tag">ALM</span>
+          <span class="skill-tag">SLA Tracking</span>
+          <span class="skill-tag">Defect Dashboards</span>
+          <span class="skill-tag">Regression Testing</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Agile / Project Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">Sprint Planning</span>
+          <span class="skill-tag">Backlog Refinement</span>
+          <span class="skill-tag">Retrospectives</span>
+          <span class="skill-tag">Stand-ups</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ServiceNow</span>
+          <span class="skill-tag">JIRA</span>
+          <span class="skill-tag">ALM</span>
+          <span class="skill-tag">Selenium</span>
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">Microsoft Power Platform</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-title">Cloud & Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Azure</span>
+          <span class="skill-tag">Google Cloud Platform</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Generative AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <p class="section-eyebrow">Qualifications</p>
+    <h2 class="section-title">Certifications &amp; <em>Education</em></h2>
+
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-name">Professional Scrum Product Owner II</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Microsoft Azure AZ-900</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🤖</div>
+        <div class="cert-name">Microsoft AI-900</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Google Cloud Digital Leader</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">✨</div>
+        <div class="cert-name">Google Generative AI Leader</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🐍</div>
+        <div class="cert-name">IBM Python for Data Science</div>
+      </div>
+      <div class="cert-card reveal" style="border-color: rgba(200,169,110,0.3); background: rgba(200,169,110,0.04);">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">B.Tech — Applied Electronics &amp; Instrumentation Engineering</div>
+          <div style="font-size:0.72rem; color: var(--text-light); margin-top: 0.3rem;">West Bengal University of Technology, Kolkata · 2011</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOMPLISHMENTS -->
+<section id="accomplishments">
+  <div class="section-inner">
+    <p class="section-eyebrow" style="color: var(--gold);">Recognition</p>
+    <h2 class="section-title">Awards &amp; <em>Accomplishments</em></h2>
+
+    <div class="awards-grid">
+      <div class="award-card reveal">
+        <div class="award-icon">🥇</div>
+        <div class="award-title">Best Team Award</div>
+        <div class="award-desc">Part of the Automation Team recognised for excellence in project delivery at TCS.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-icon">⚡</div>
+        <div class="award-title">Xcelerate Warrior Certificate</div>
+        <div class="award-desc">Awarded at TCS for completing pre-defined role-based competencies with distinction.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-icon">🎯</div>
+        <div class="award-title">On the Spot Award ×2</div>
+        <div class="award-desc">Twice recognised at TCS for assisting multiple projects in setting up BDD automation frameworks.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-icon">⭐</div>
+        <div class="award-title">Star of the Month</div>
+        <div class="award-desc">Awarded at TCS for outstanding contribution to project delivery success.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow">Let's Connect</p>
+    <h2 class="section-title">Get in <em>Touch</em></h2>
+
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">Open to new opportunities in Release Management, Delivery Management, and related roles within financial services and large-scale enterprise delivery.</p>
+        <div class="contact-items">
+          <a href="mailto:amitavanandi@hotmail.com" class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            amitavanandi@hotmail.com
+          </a>
+          <a href="tel:+447833817412" class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            +44 7833 817412
+          </a>
+          <a href="https://linkedin.com/in/amitavan" target="_blank" class="contact-item">
+            <div class="contact-item-icon">💼</div>
+            linkedin.com/in/amitavan
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right reveal">
+        <h3>Amitava Nandi</h3>
+        <p>Release Manager · Delivery Manager · Defect Manager</p>
+        <div class="location">📍 Peterborough, United Kingdom</div>
+        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.6;">14+ years delivering complex, multi-phase core banking migrations across UK and Australia. Specialist in TCS BaNCS, Agile delivery, and cross-functional team coordination.</div>
+        <div class="langs">
+          <div class="lang-item"><span>English</span><span class="lang-level">Full Professional</span></div>
+          <div class="lang-item"><span>Hindi</span><span class="lang-level">Professional Working</span></div>
+          <div class="lang-item"><span>Bengali</span><span class="lang-level">Native / Bilingual</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Amitava Nandi</div>
+  <div class="footer-copy">© 2026 · Peterborough, United Kingdom</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
